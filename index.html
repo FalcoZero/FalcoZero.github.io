@@ -1,24 +1,50 @@
 <html>
 <body>
     <h1>House System: Score Tracker!</h1>
-    <form>
-        <div class="input-group">
+    <form action>
+        <div>
             <h3 id="bear">Bear Clan:</h3>
             <input type="number" name="BearScore" readonly><br>
-            <button>-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
+            <button value="-20" onClick="clic(this,BearScore);">-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
             <h3 id="wolf">Wolf Pack:</h3>
-            <input type="number" name="WolfScore" readonly><br>
+            <input type="number" name="WolfScore" value="" readonly><br>
             <button>-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
             <h3 id="lion">Lion Pride:</h3>
-            <input type="number" name="LionScore" readonly><br>
+            <input type="number" name="LionScore" value="" readonly><br>
             <button>-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
             <h3 id="owl">Owl Parliament:</h3>
-            <input type="number" name="OwlScore" readonly><br>
+            <input type="number" name="OwlScore" value="" readonly><br>
             <button>-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
         </div>
-        <br>
-        <input type="submit" value="Submit">
-    </form>    
+        <br> 
+    </form>
+     
+    <script type ="text/javascript">
+    function clic(element,score)
+    {
+        var s = score.value;
+        switch(element.value)
+        {
+            case "-20":
+                s -= 20;
+            break;
+            case "-15":
+                s -= 15;
+            break;
+        }
+        score.value = s;
+    } 
+
+    function WriteToFile(passForm) 
+    {
+    var fso = CreateObject("Scripting.FileSystemObject");  
+    var s = fso.CreateTextFile("C:\test.txt", True);
+    s.writeline(document.passForm.input1.value);
+    s.writeline(document.passForm.input2.value);
+    s.writeline(document.passForm.input3.value);
+    s.Close();
+    }  
+    </script>            
 </body>
 </html>
 
