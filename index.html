@@ -5,7 +5,7 @@
         <div>        
             <h3 id="bear">Bear Clan:</h3>
             <input type="number" name="BearScore" value="" readonly><br>
-            <button value="-20" onclick="updateScore(-20,BearScore,'Bear');">-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
+            <button value="-20">-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
             <h3 id="wolf">Wolf Pack:</h3>
             <input type="number" name="WolfScore" value="" readonly><br>
             <button>-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
@@ -15,17 +15,24 @@
             <h3 id="owl">Owl Parliament:</h3>
             <input type="number" name="OwlScore" value="" readonly><br>
             <button>-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
-            <br>
+        </div>
+        <br> 
+    </form>
+     
+    <form onsubmit="download(this['name'].value, this['text'].value)">
+        <div>
+            <input type="text" name="name" value="HouseScores.txt">
+            <textarea rows=3 cols=50 name="text"></textarea>
+            <input type="submit" value="Download">
             <h1>Upload Current Scores:</h1>
                 <div>
                     Select a text file: 
                     <input type="file" id="fileInput">
                 </div>
-           <pre id="fileDisplayArea"><pre>
-        </div>
-        <br> 
+           <pre id="fileDisplayArea"></pre>
+           </div>
     </form>
-     
+
     <script type ="text/javascript">
   
     window.onload = function() 
@@ -49,7 +56,24 @@
             }
         });
     }
-</script>     
+
+
+    function download(filename, text) 
+    {
+    var pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + 
+
+    encodeURIComponent(text));
+    pom.setAttribute('download', filename);
+
+    pom.style.display = 'none';
+    document.body.appendChild(pom);
+
+    pom.click();
+
+    document.body.removeChild(pom);
+}
+    </script>     
 </body>
 </html>
 
