@@ -1,11 +1,11 @@
 <html>
 <body>
     <h1>House System: Score Tracker!</h1>
-    <form action = "#">
+    <form action="#">
         <div>        
             <h3 id="bear">Bear Clan:</h3>
-            <input type="number" name="BearScore" readonly><br>
-            <button value="-20" onClick="clic(this,BearScore);">-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
+            <input type="number" name="BearScore" value="" readonly><br>
+            <button value="-20" onclick="updateScore(-20,BearScore);">-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
             <h3 id="wolf">Wolf Pack:</h3>
             <input type="number" name="WolfScore" value="" readonly><br>
             <button>-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
@@ -27,29 +27,7 @@
     </form>
      
     <script type ="text/javascript">
-    function clic(element,score)
-    {
-        var s = score.value;
-        switch(element.value)
-        {
-            case "-20":
-                s -= 20;
-            break;
-            case "-15":
-                s -= 15;
-            break;
-        }
-        score.value = s;
-    } 
-
-    function updateScore()
-    {
-        var fs = require("fs");
-        var text = fs.readFileSync("./HouseScores.txt");
-        var textByLine = text.split("\n")
-        
-    }
-
+    var array = new Array();
     window.onload = function() {
         var fileInput = document.getElementById('fileInput');
         var fileDisplayArea = document.getElementById('fileDisplayArea');
@@ -60,7 +38,7 @@
 
             if (file.type.match(textType)) {
                 var reader = new FileReader();
-
+                var text = reader.split("\n");
                 reader.onload = function(e) 
                 {
                     fileDisplayArea.innerText = reader.result;
@@ -71,8 +49,14 @@
                 fileDisplayArea.innerText = "File not supported!";
             }
         });
+
+    function updateScore(v,score)
+    {
+        var i = 0;
+        return false;
+    }
 }
-    </script>            
+</script>            
 </body>
 </html>
 
