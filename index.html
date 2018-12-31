@@ -1,8 +1,8 @@
 <html>
 <body>
     <h1>House System: Score Tracker!</h1>
-    <form action>
-        <div>
+    <form action = "#">
+        <div>        
             <h3 id="bear">Bear Clan:</h3>
             <input type="number" name="BearScore" readonly><br>
             <button value="-20" onClick="clic(this,BearScore);">-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
@@ -15,6 +15,13 @@
             <h3 id="owl">Owl Parliament:</h3>
             <input type="number" name="OwlScore" value="" readonly><br>
             <button>-20</button><button>-15</button><button>-10</button><button>-5</button><button>+5</button><button>+10</button><button>+15</button><button>+20</button><br>
+            <br>
+            <h1>Upload Current Scores:</h1>
+                <div>
+                    Select a text file: 
+                    <input type="file" id="fileInput">
+                </div>
+           <pre id="fileDisplayArea"><pre>
         </div>
         <br> 
     </form>
@@ -35,15 +42,35 @@
         score.value = s;
     } 
 
-    function WriteToFile(passForm) 
+    function updateScore()
     {
-    var fso = CreateObject("Scripting.FileSystemObject");  
-    var s = fso.CreateTextFile("C:\test.txt", True);
-    s.writeline(document.passForm.input1.value);
-    s.writeline(document.passForm.input2.value);
-    s.writeline(document.passForm.input3.value);
-    s.Close();
-    }  
+        var fs = require("fs");
+        var text = fs.readFileSync("./HouseScores.txt");
+        var textByLine = text.split("\n")
+    }
+
+    window.onload = function() {
+        var fileInput = document.getElementById('fileInput');
+        var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+        fileInput.addEventListener('change', function(e) {
+            var file = fileInput.files[0];
+            var textType = /text.*/;
+
+            if (file.type.match(textType)) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) 
+                {
+                    fileDisplayArea.innerText = reader.result;
+                }
+
+                reader.readAsText(file);    
+            } else {
+                fileDisplayArea.innerText = "File not supported!";
+            }
+        });
+}
     </script>            
 </body>
 </html>
